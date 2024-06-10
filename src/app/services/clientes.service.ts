@@ -72,7 +72,7 @@ export class ClientesService {
     if (estado === 'editar') {
       this.abmForm = {
         descripcion: cliente.descripcion,
-        tipoIdentificacion: cliente.tipo_identificacion,
+        tipoIdentificacion: cliente.tipoIdentificacion,
         identificacion: cliente.identificacion,
         telefono: cliente.telefono,
         email: '',

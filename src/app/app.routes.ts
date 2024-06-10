@@ -28,7 +28,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./pages/pages.component'),
-    canActivate: [ AuthGuard ],
+    canActivate: [AuthGuard],
     children: [
 
       // Home
@@ -69,7 +69,30 @@ export const routes: Routes = [
         path: 'usuarios/password/:id',
         title: 'Editar password',
         loadComponent: () => import('./pages/usuarios/editar-password/editar-password.component'),
-      }
+      },
+
+      // Clientes
+      {
+        path: 'clientes',
+        title: 'Clientes',
+        loadComponent: () => import('./pages/clientes/clientes.component'),
+      },
+
+      // Obras - Madera
+
+      // Tipos placas madera
+      {
+        path: 'tipos-placas-madera',
+        title: 'Madera - Tipos de placa',
+        loadComponent: () => import('./pages/tiposPlacasMadera/tiposPlacasMadera.component'),
+      },
+
+      // Motivos de pases
+      {
+        path: 'obras-madera-motivos-pases',
+        title: 'Madera - Motivos de pases',
+        loadComponent: () => import('./pages/obrasMaderaMotivoPase/obrasMaderaMotivoPase.component'),
+      },
 
     ]
   },

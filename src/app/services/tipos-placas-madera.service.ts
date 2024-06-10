@@ -16,6 +16,7 @@ export class TiposPlacasMaderaService {
   public tipos: any[] = [];
   public tipoSeleccionado: any = null;
   public abmForm = {
+    codigo: '',
     descripcion: '',
     activo: true
   };
@@ -61,11 +62,13 @@ export class TiposPlacasMaderaService {
     this.showModalAbm = true;
     if (estado === 'editar') {
       this.abmForm = {
+        codigo: tipo.codigo,
         descripcion: tipo.descripcion,
         activo: true,
       }
     } else {
       this.abmForm = {
+        codigo: '',
         descripcion: '',
         activo: true
       }

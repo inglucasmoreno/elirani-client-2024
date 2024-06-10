@@ -26,6 +26,8 @@ export class NavbarComponent implements OnInit {
     descripcion: 'Configuraciones',
     items: [
       { nombre: 'Usuarios', ruta: 'usuarios' },
+      { nombre: 'Madera - Tipos de placa', ruta: 'tipos-placas-madera' },
+      { nombre: 'Madera - Motivos de pases', ruta: 'obras-madera-motivos-pases' },
     ]
   }
 

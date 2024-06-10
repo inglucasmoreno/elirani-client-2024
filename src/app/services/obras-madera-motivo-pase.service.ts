@@ -13,7 +13,7 @@ export class ObrasMaderaMotivoPaseService {
   public showModalAbm = false;
 
   public estadoAbm: 'crear' | 'editar' = 'crear';
-  public motivo: any[] = [];
+  public motivos: any[] = [];
   public motivoSeleccionado: any = null;
   public abmForm = {
     descripcion: '',
