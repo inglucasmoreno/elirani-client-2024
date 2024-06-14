@@ -1,19 +1,19 @@
-<app-abmClientes (insertEvent)="nuevoCliente($event)" (updateEvent)="actualizarCliente($event)"></app-abmClientes>
+<app-abmTiposMuebles (insertEvent)="nuevoTipo($event)" (updateEvent)="actualizarTipo($event)"></app-abmTiposMuebles>
 
-<!-- Listado de clientes -->
+<!-- Listado de tipos -->
 <div class="md:max-w-7xl mx-auto">
   <app-tarjeta-lista>
     <div class="container mx-auto">
       <div>
         <div class="flex items-center justify-between bg-gray-800 px-4 py-3 rounded-t">
           <div class="ml-2 text-white">
-            <h2 class="text-xl md:text-2xl leading-tight">
-              LISTADO DE CLIENTES
+            <h2 class="text-md md:text-2xl leading-tight">
+              MADERA - TIPOS DE MUEBLES
             </h2>
-            <p> Total de clientes: {{ this.clientesService.clientes?.length }} </p>
+            <p> Total de tipos: {{ this.tiposMueblesService.tipos?.length }} </p>
           </div>
           <div>
-            <button title="Nuevo cliente" (click)="abrirAbm('crear')" class="boton-nuevo-header">
+            <button title="Nuevo tipo" (click)="abrirAbm('crear')" class="boton-nuevo-header">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -68,7 +68,7 @@
                   <th
                     class="px-5 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-900 tracking-wider">
                     <div (click)="ordenarPorColumna('descripcion')"
-                      class="cursor-pointer w-max flex items-center focus:outline-none">
+                      class="cursor-pointer flex items-center focus:outline-none">
                       <span> Imagen </span>
                       <span class="ml-2 text-gray-600">
                         <svg *ngIf="ordenar.columna == 'descripcion' && ordenar.direccion == 'asc'" width="15"
@@ -92,8 +92,8 @@
                   <th
                     class="px-5 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-900 tracking-wider">
                     <div (click)="ordenarPorColumna('descripcion')"
-                      class="cursor-pointer w-max flex items-center focus:outline-none">
-                      <span> Nombre o Razon social </span>
+                      class="cursor-pointer flex items-center focus:outline-none">
+                      <span> Descripción </span>
                       <span class="ml-2 text-gray-600">
                         <svg *ngIf="ordenar.columna == 'descripcion' && ordenar.direccion == 'asc'" width="15"
                           height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -115,47 +115,23 @@
                   </th>
                   <th
                     class="px-5 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-900 tracking-wider">
-                    <div (click)="ordenarPorColumna('tipoIdentificacion')"
+                    <div (click)="ordenarPorColumna('placas')"
                       class="cursor-pointer w-max flex items-center focus:outline-none">
-                      <span> Tipo identificacion </span>
+                      <span> Con placas </span>
                       <span class="ml-2 text-gray-600">
-                        <svg *ngIf="ordenar.columna == 'tipoIdentificacion' && ordenar.direccion == 'asc'" width="15"
-                          height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                        <svg *ngIf="ordenar.columna == 'placas' && ordenar.direccion == 'asc'" width="15" height="15"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round" class="feather feather-chevron-down">
                           <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
-                        <svg *ngIf="ordenar.columna == 'tipoIdentificacion' && ordenar.direccion == 'desc'" width="15"
-                          height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up">
+                        <svg *ngIf="ordenar.columna == 'placas' && ordenar.direccion == 'desc'" width="15" height="15"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round" class="feather feather-chevron-up">
                           <polyline points="18 15 12 9 6 15"></polyline>
                         </svg>
-                        <svg *ngIf="ordenar.columna != 'tipoIdentificacion'" width="15" height="15" viewBox="0 0 24 24"
-                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                          stroke-linejoin="round" class="feather feather-minus">
-                          <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                      </span>
-                    </div>
-                  </th>
-                  <th
-                    class="px-5 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-900 tracking-wider">
-                    <div (click)="ordenarPorColumna('identificacion')"
-                      class="cursor-pointer flex items-center focus:outline-none">
-                      <span> Identificacion </span>
-                      <span class="ml-2 text-gray-600">
-                        <svg *ngIf="ordenar.columna == 'identificacion' && ordenar.direccion == 'asc'" width="15"
-                          height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                        <svg *ngIf="ordenar.columna == 'identificacion' && ordenar.direccion == 'desc'" width="15"
-                          height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up">
-                          <polyline points="18 15 12 9 6 15"></polyline>
-                        </svg>
-                        <svg *ngIf="ordenar.columna != 'identificacion'" width="15" height="15" viewBox="0 0 24 24"
-                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                          stroke-linejoin="round" class="feather feather-minus">
+                        <svg *ngIf="ordenar.columna != 'placas'" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          class="feather feather-minus">
                           <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
                       </span>
@@ -219,43 +195,37 @@
                   </th>
                 </tr>
               </thead>
-              <tbody *ngIf="this.clientesService.clientes">
-                @for(cliente of this.clientesService.clientes |
-                filtroClientes:filtro.parametro:filtro.activo | paginate: {itemsPerPage:
-                cantidadItems, currentPage: paginaActual}; track cliente.id){
+              <tbody *ngIf="this.tiposMueblesService.tipos">
+                @for(tipo of this.tiposMueblesService.tipos |
+                filtroTiposMuebles:filtro.parametro:filtro.activo | paginate: {itemsPerPage:
+                cantidadItems, currentPage: paginaActual}; track tipo.id){
                 <tr class="animate__animated animate__fadeIn hover:bg-gray-50">
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
                     <p class="text-gray-900 w-max whitespace-no-wrap p-2">
-                      <img src="assets/svg/cliente.svg" alt="Imagen de clientes" class="w-10 h-10">
+                      <img src="assets/svg/tipoMueble.svg" alt="Imagen de tipos de muebles" class="w-10 h-10">
                     </p>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
                     <p class="text-gray-900 w-max whitespace-no-wrap p-2">
-                      {{ cliente.descripcion }}
+                      {{ tipo.descripcion }}
                     </p>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
                     <p class="text-gray-900 w-max whitespace-no-wrap p-2">
-                      {{ cliente.tipoIdentificacion }}
-                    </p>
-                  </td>
-                  <td class="px-5 py-2 border-b border-gray-200 text-xs">
-                    <p class="text-gray-900 w-max whitespace-no-wrap p-2">
-                      {{ cliente.identificacion.trim() === '' ? 'Sin especificar' : cliente.identificacion}}
+                      {{ tipo.placas ? 'Con placas' : 'Sin placas'}}
                     </p>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
                     <p class="text-gray-900 whitespace-no-wrap">
-                      {{ cliente.createdAt | fecha }}
+                      {{ tipo.createdAt | fecha }}
                     </p>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
-                    <app-pastilla-estado [activo]=cliente.activo
-                      (click)="actualizarEstado(cliente)"></app-pastilla-estado>
+                    <app-pastilla-estado [activo]=tipo.activo (click)="actualizarEstado(tipo)"></app-pastilla-estado>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs text-center">
                     <span class="flex items-center justify-center text-gray-900 whitespace-no-wrap">
-                      <button (click)="abrirAbm('editar', cliente)" title="Editar cliente" class="boton-editar">
+                      <button (click)="abrirAbm('editar', tipo)" title="Editar tipo" class="boton-editar">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                           stroke="currentColor" class="w-5 h-5">
                           <path stroke-linecap="round" stroke-linejoin="round"
@@ -268,8 +238,8 @@
                 }@empty {
                 <tr class="p-4 text-white"> a </tr>
                 <tr class="w-full">
-                  <td colspan="6" class="text-gray-500 text-sm p-2 border border-gray-300 text-center bg-gray-50 mt-4">
-                    No se encontraron clientes </td>
+                  <td colspan="4" class="text-gray-500 text-sm p-2 border border-gray-300 text-center bg-gray-50 mt-4">
+                    No se encontraron tipos de muebles </td>
                 </tr>
                 }
               </tbody>
@@ -277,11 +247,10 @@
           </div>
         </div>
       </div>
-      <div *ngIf="clientesService.clientes.length > 0"
+      <div *ngIf="tiposMueblesService.tipos.length > 0"
         class="px-5 text-sm py-5 mt-4 bg-white border-t flex shadow flex-col xs:flex-row items-center xs:justify-between">
         <pagination-controls nextLabel="Siguiente" previousLabel="Anterior"
           (pageChange)="paginaActual = $event"></pagination-controls>
       </div>
     </div>
   </app-tarjeta-lista>
-</div>

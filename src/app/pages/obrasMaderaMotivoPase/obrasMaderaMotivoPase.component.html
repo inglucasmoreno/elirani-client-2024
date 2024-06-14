@@ -1,8 +1,5 @@
-
-<app-abmObrasMaderaMotivoPase
-  (insertEvent)="nuevoMotivo($event)"
-  (updateEvent)="actualizarMotivo($event)"
-></app-abmObrasMaderaMotivoPase>
+<app-abmObrasMaderaMotivoPase (insertEvent)="nuevoMotivo($event)"
+  (updateEvent)="actualizarMotivo($event)"></app-abmObrasMaderaMotivoPase>
 
 <!-- Listado de motivos -->
 <div class="md:max-w-7xl mx-auto">
@@ -69,6 +66,30 @@
             <table class="min-w-full leading-normal">
               <thead>
                 <tr class="border">
+                  <th
+                    class="px-5 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-900 tracking-wider">
+                    <div (click)="ordenarPorColumna('descripcion')"
+                      class="cursor-pointer flex items-center focus:outline-none">
+                      <span> Imagen </span>
+                      <span class="ml-2 text-gray-600">
+                        <svg *ngIf="ordenar.columna == 'descripcion' && ordenar.direccion == 'asc'" width="15"
+                          height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                        <svg *ngIf="ordenar.columna == 'descripcion' && ordenar.direccion == 'desc'" width="15"
+                          height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up">
+                          <polyline points="18 15 12 9 6 15"></polyline>
+                        </svg>
+                        <svg *ngIf="ordenar.columna != 'descripcion'" width="15" height="15" viewBox="0 0 24 24"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round" class="feather feather-minus">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                      </span>
+                    </div>
+                  </th>
                   <th
                     class="px-5 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-900 tracking-wider">
                     <div (click)="ordenarPorColumna('descripcion')"
@@ -155,7 +176,12 @@
                 @for(motivo of this.motivosService.motivos |
                 filtroObrasMaderaMotivoPase:filtro.parametro:filtro.activo | paginate: {itemsPerPage:
                 cantidadItems, currentPage: paginaActual}; track motivo.id){
-                <tr class="animate__animated animate__fadeIn">
+                <tr class="animate__animated animate__fadeIn hover:bg-gray-50">
+                  <td class="px-5 py-2 border-b border-gray-200 text-xs">
+                    <p class="text-gray-900 w-max whitespace-no-wrap p-2">
+                      <img src="assets/svg/motivoPaseMadera.svg" alt="Imagen de movito pase" class="w-10 h-10">
+                    </p>
+                  </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
                     <p class="text-gray-900 w-max whitespace-no-wrap p-2">
                       {{ motivo.descripcion }}
@@ -167,7 +193,8 @@
                     </p>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs">
-                    <app-pastilla-estado [activo]=motivo.activo (click)="actualizarEstado(motivo)"></app-pastilla-estado>
+                    <app-pastilla-estado [activo]=motivo.activo
+                      (click)="actualizarEstado(motivo)"></app-pastilla-estado>
                   </td>
                   <td class="px-5 py-2 border-b border-gray-200 text-xs text-center">
                     <span class="flex items-center justify-center text-gray-900 whitespace-no-wrap">
@@ -200,4 +227,3 @@
       </div>
     </div>
   </app-tarjeta-lista>
-

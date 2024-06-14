@@ -21,15 +21,9 @@ import NavbarItemComponent from './components/navbar-item/navbar-item.component'
 export class NavbarComponent implements OnInit {
 
   public usuarioLogin: any = null;
-
-  public configuraciones = {
-    descripcion: 'Configuraciones',
-    items: [
-      { nombre: 'Usuarios', ruta: 'usuarios' },
-      { nombre: 'Madera - Tipos de placa', ruta: 'tipos-placas-madera' },
-      { nombre: 'Madera - Motivos de pases', ruta: 'obras-madera-motivos-pases' },
-    ]
-  }
+  public secciones = {
+    configuraciones: false,
+  };
 
   constructor(
     public authService: AuthService,
@@ -38,6 +32,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioLogin = this.authService.usuario;
+  }
+
+  // Abrir o cerrar seccion
+  abrirCerrarSeccion(seccion: string): void {
+    this.secciones[seccion] = !this.secciones[seccion];
   }
 
   // Metodo: Cerrar sesion

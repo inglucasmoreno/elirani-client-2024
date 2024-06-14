@@ -80,6 +80,13 @@ export const routes: Routes = [
 
       // Obras - Madera
 
+      // Tipos muebles
+      {
+        path: 'tipos-muebles',
+        title: 'Madera - Tipos de muebles',
+        loadComponent: () => import('./pages/tiposMuebles/tiposMuebles.component'),
+      },
+
       // Tipos placas madera
       {
         path: 'tipos-placas-madera',
