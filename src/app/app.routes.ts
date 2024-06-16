@@ -78,7 +78,14 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/clientes/clientes.component'),
       },
 
+      // --- OBRAS MADERA ---
+
       // Obras - Madera
+      {
+        path: 'obras-madera',
+        title: 'Madera - Listado de obras',
+        loadComponent: () => import('./pages/obrasMadera/obrasMadera.component'),
+      },
 
       // Tipos muebles
       {

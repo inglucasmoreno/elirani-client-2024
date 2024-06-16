@@ -42,12 +42,18 @@ export class ClientesService {
     })
   }
 
-  listarClientes({ direccion = 'desc', columna = 'descripcion', parametro = '' }): Observable<any> {
+  listarClientes({
+    direccion = 'desc',
+    columna = 'descripcion',
+    parametro = '',
+    activo = ''
+  }): Observable<any> {
     return this.http.get(urlApi, {
       params: {
         direccion: String(direccion),
         columna,
-        parametro
+        parametro,
+        activo
       },
       headers: this.getToken
     })

@@ -1,0 +1,79 @@
+<app-modal [showModal]="obrasMaderaService.showModalAbm">
+  <div>
+    <div class="flex items-center justify-between bg-gray-800 rounded-t p-2">
+      <h1 class=" text-white px-2 py-1 rounded-t text-lg"> {{ obrasMaderaService.estadoAbm == 'crear' ? 'Creando obra' :
+        'Editando obra' }} </h1>
+      <svg (click)="obrasMaderaService.showModalAbm= false" width="20" height="20" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="cursor-pointer feather feather-x text-white mr-2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+    <div class="px-4 pt-2 max-h-96 overflow-y-auto text-sm">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <p class="font-semibold"> <span class="text-red-500"> * </span> Fecha de inicio </p>
+          <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.fechaInicio"
+            class="input-generico w-full mt-2 mb-2" placeholder="Ej. LC0001" type="date">
+        </div>
+        <div>
+          <p class="font-semibold"> <span class="text-red-500"> * </span> Código </p>
+          <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.codigo"
+            class="input-generico w-full mt-2 mb-2" placeholder="Ej. LC0001" type="text">
+        </div>
+      </div>
+      <div class="mt-1">
+        <p class="font-semibold"> <span class="text-red-500"> * </span> Cliente </p>
+        <div class="flex items-center">
+          <select *ngIf="!loadingClientes" [(ngModel)]="obrasMaderaService.abmForm.clienteId" class="input-generico w-full mb-2 mt-2">
+            <option value=""> Seleccionar cliente </option>
+            <option *ngFor="let cliente of clientes" [value]="cliente.id"> {{ cliente.descripcion }} </option>
+          </select>
+          <button title="Nuevo cliente" class="boton-crear ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </button>
+        </div>
+        <p *ngIf="loadingClientes">
+          <span> Cargando clientes... </span>
+        </p>
+      </div>
+      <div>
+        <p class="font-semibold"> Domicilio </p>
+        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.domicilio"
+          class="input-generico w-full mt-2 mb-2" placeholder="Ej. 9 de Julio 811" type="text">
+      </div>
+      <div>
+        <p class="font-semibold"> Descripción </p>
+        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.descripcion"
+          class="input-generico w-full mt-2 mb-2" placeholder="Ej. Obra prioritaria" type="text">
+      </div>
+      <div *ngIf="obrasMaderaService.obraSeleccionada && obrasMaderaService.estadoAbm === 'editar'"
+        class="xl:flex items-center">
+        <div class="xl:w-1/2">
+          <p class="font-semibold text-sm"> Fecha de alta </p>
+          <div class="border text-sm mt-2 border-gray-400 rounded p-2 bg-gray-100">
+            {{ obrasMaderaService.obraSeleccionada.createdAt | fecha }}
+          </div>
+        </div>
+        <div class="xl:ml-4 xl:w-1/2 mt-2 xl:mt-0">
+          <p class="font-semibold text-sm"> Usuario creador </p>
+          <div class="border text-sm capitalize mt-2 border-gray-400 rounded p-2 bg-gray-100">
+            {{ obrasMaderaService.obraSeleccionada.creatorUser.apellido.toLowerCase() }} {{
+            obrasMaderaService.obraSeleccionada.creatorUser.nombre.toLowerCase() }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-4 pb-2 mt-1">
+      <button *ngIf="obrasMaderaService.estadoAbm == 'crear'" (click)="nuevaObra()" class="boton-crear w-full mt-1">
+        Crear obra
+      </button>
+      <button *ngIf="obrasMaderaService.estadoAbm == 'editar'" (click)="actualizarObra()"
+        class="boton-editar w-full mt-4">
+        Actualizar obra </button>
+    </div>
+  </div>
+</app-modal>
