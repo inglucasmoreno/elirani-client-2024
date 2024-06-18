@@ -38,13 +38,15 @@ export default class ObrasMaderaComponent implements OnInit {
   public permiso_escritura: string[] = ['OBRAS_MADERA_ALL'];
 
   // Paginacion
+  public totalItems: number;
   public paginaActual: number = 1;
   public cantidadItems: number = 10;
 
   // Filtrado
   public filtro = {
     activo: 'true',
-    parametro: ''
+    parametro: '',
+    estado: 'Pendiente'
   }
 
   // Ordenar
@@ -73,10 +75,16 @@ export default class ObrasMaderaComponent implements OnInit {
   listarObras(): void {
     const parametros: any = {
       direccion: this.ordenar.direccion,
-      columna: this.ordenar.columna
+      columna: this.ordenar.columna,
+      parametro: this.filtro.parametro,
+      estado: this.filtro.estado,
+      pagina: this.paginaActual,
+      itemsPorPagina: this.cantidadItems,
     }
+    this.alertService.loading();
     this.obrasMaderaService.listarObras(parametros).subscribe({
-      next: ({ obras }) => {
+      next: ({ obras, totalItems }) => {
+        this.totalItems = totalItems;
         this.obrasMaderaService.obras = obras;
         this.alertService.close();
       }, error: ({ error }) => this.alertService.errorApi(error.message)
@@ -130,6 +138,13 @@ export default class ObrasMaderaComponent implements OnInit {
     this.ordenar.columna = columna;
     this.ordenar.direccion = this.ordenar.direccion == 'asc' ? 'desc' : 'asc';
     this.alertService.loading();
+    this.listarObras();
+  }
+
+  // Paginacion - Cambiar pagina
+  cambiarPagina(nroPagina): void {
+    this.paginaActual = nroPagina;
+    // this.desde = (this.paginaActual - 1) * this.cantidadItems;
     this.listarObras();
   }
 

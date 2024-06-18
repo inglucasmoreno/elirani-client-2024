@@ -9,6 +9,7 @@ import { ModalComponent } from '../../../components/modal/modal.component';
 import { RouterModule } from '@angular/router';
 import { format } from 'date-fns';
 import { ClientesService } from '../../../services/clientes.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   standalone: true,
@@ -20,6 +21,7 @@ import { ClientesService } from '../../../services/clientes.service';
     FormsModule,
     FechaPipe,
     ModalComponent,
+    NgSelectModule,
     RouterModule,
   ]
 })
@@ -56,29 +58,36 @@ export default class AbmObrasMaderaComponent implements OnInit {
 
     const {
       fechaInicio,
+      fechaColocacionEstimada,
       codigo,
       clienteId,
-      descripcion,
-      domicilio,
+      observaciones,
+      direccion,
     } = this.obrasMaderaService.abmForm;
 
     // Verificacion
-    if (this.obrasMaderaService.abmForm.fechaInicio.trim() === '') return this.alertService.info('Debe colocar una fecha');
-    if (this.obrasMaderaService.abmForm.codigo.trim() === '') return this.alertService.info('El código es obligatorio');
-    if (this.obrasMaderaService.abmForm.clienteId.trim() === '') return this.alertService.info('Debe seleccionar un cliente');
+    if (fechaColocacionEstimada.trim() === '')
+      return this.alertService.info('Debe colocar una fecha de colocación');
+    if (codigo.trim() === '')
+      return this.alertService.info('El código es obligatorio');
+    if (!clienteId)
+      return this.alertService.info('Debe seleccionar un cliente');
 
     this.alertService.loading();
 
     // Adaptando fechas
     const fechaInicioAdt = new Date(fechaInicio);
+    const fechaColocacionEstimadaAdt = new Date(fechaColocacionEstimada);
     fechaInicioAdt.setHours(fechaInicioAdt.getHours() + 3);
+    fechaColocacionEstimadaAdt.setHours(fechaColocacionEstimadaAdt.getHours() + 3);
 
     const data = {
       codigo,
       fechaInicio: fechaInicioAdt,
+      fechaColocacionEstimada: fechaColocacionEstimadaAdt,
       clienteId: Number(clienteId),
-      descripcion,
-      domicilio,
+      observaciones,
+      direccion,
       creatorUserId: this.authService.usuario.userId,
     }
 
@@ -95,28 +104,36 @@ export default class AbmObrasMaderaComponent implements OnInit {
 
     const {
       fechaInicio,
+      fechaColocacionEstimada,
       codigo,
       clienteId,
-      descripcion,
-      domicilio,
+      observaciones,
+      direccion,
     } = this.obrasMaderaService.abmForm;
 
     // Verificacion
-    if (this.obrasMaderaService.abmForm.fechaInicio.trim() === '') return this.alertService.info('Debe colocar una fecha');
-    if (this.obrasMaderaService.abmForm.codigo.trim() === '') return this.alertService.info('El código es obligatorio');
+    if (fechaColocacionEstimada.trim() === '')
+      return this.alertService.info('Debe colocar una fecha de colocación');
+    if (codigo.trim() === '')
+      return this.alertService.info('El código es obligatorio');
+    if (!clienteId)
+      return this.alertService.info('Debe seleccionar un cliente');
 
     this.alertService.loading();
 
     // Adaptando fechas
     const fechaInicioAdt = new Date(fechaInicio);
+    const fechaColocacionEstimadaAdt = new Date(fechaColocacionEstimada);
     fechaInicioAdt.setHours(fechaInicioAdt.getHours() + 3);
+    fechaColocacionEstimadaAdt.setHours(fechaColocacionEstimadaAdt.getHours() + 3);
 
     const data = {
       codigo,
       fechaInicio: fechaInicioAdt,
+      fechaColocacionEstimada: fechaColocacionEstimadaAdt,
       clienteId: Number(clienteId),
-      descripcion,
-      domicilio,
+      observaciones,
+      direccion,
       creatorUserId: this.authService.usuario.userId,
     }
 

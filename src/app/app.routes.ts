@@ -87,6 +87,13 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/obrasMadera/obrasMadera.component'),
       },
 
+      // Obras - Madera - Detalles
+      {
+        path: 'obras-madera-detalles/:id',
+        title: 'Madera - Detalles de obra',
+        loadComponent: () => import('./pages/obrasMadera/obrasMaderaDetalles/obrasMaderaDetalles.component'),
+      },
+
       // Tipos muebles
       {
         path: 'tipos-muebles',

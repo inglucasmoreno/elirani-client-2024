@@ -11,17 +11,18 @@ const urlApi = environments.base_url + '/obras-madera';
 })
 export class ObrasMaderaService {
 
-  public showModalAbm = true;
+  public showModalAbm = false;
 
   public estadoAbm: 'crear' | 'editar' = 'crear';
   public obras: any[] = [];
   public obraSeleccionada: any = null;
   public abmForm = {
     fechaInicio: format(new Date(), 'yyyy-MM-dd'),
+    fechaColocacionEstimada: '',
     codigo: '',
-    clienteId: '',
-    descripcion: '',
-    domicilio: '',
+    clienteId: undefined,
+    observaciones: '',
+    direccion: '',
   };
 
   get getToken(): any {
@@ -36,12 +37,22 @@ export class ObrasMaderaService {
     })
   }
 
-  listarObras({ direccion = 'desc', columna = 'id', parametro = '' }): Observable<any> {
+  listarObras({
+    direccion = 'desc',
+    columna = 'id',
+    parametro = '',
+    estado = '',
+    pagina = 1,
+    itemsPorPagina = 100000,
+  }): Observable<any> {
     return this.http.get(urlApi, {
       params: {
         direccion: String(direccion),
         columna,
-        parametro
+        parametro,
+        estado,
+        pagina,
+        itemsPorPagina
       },
       headers: this.getToken
     })
@@ -66,18 +77,20 @@ export class ObrasMaderaService {
     if (estado === 'editar') {
       this.abmForm = {
         fechaInicio: format(obra.fechaInicio, 'yyyy-MM-dd'),
+        fechaColocacionEstimada: format(obra.fechaColocacionEstimada, 'yyyy-MM-dd'),
         codigo: obra.codigo,
         clienteId: obra.clienteId,
-        descripcion: obra.descripcion,
-        domicilio: obra.domicilio,
+        observaciones: obra.observaciones,
+        direccion: obra.direccion,
       }
     } else {
       this.abmForm = {
         fechaInicio: format(new Date(), 'yyyy-MM-dd'),
+        fechaColocacionEstimada: '',
         codigo: '',
-        clienteId: '',
-        descripcion: '',
-        domicilio: '',
+        clienteId: undefined,
+        observaciones: '',
+        direccion: '',
       }
     }
   }

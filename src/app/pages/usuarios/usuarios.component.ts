@@ -54,7 +54,7 @@ export default class UsuariosComponent implements OnInit {
     columna: 'apellido'
   }
 
-   constructor(
+  constructor(
     private usuariosService: UsuariosService,
     private alertService: AlertService,
     private dataService: DataService,
@@ -120,6 +120,5 @@ export default class UsuariosComponent implements OnInit {
     this.alertService.loading();
     this.listarUsuarios();
   }
-
 
 }

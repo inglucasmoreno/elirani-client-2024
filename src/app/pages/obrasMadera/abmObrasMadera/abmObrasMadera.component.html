@@ -11,43 +11,43 @@
       </svg>
     </div>
     <div class="px-4 pt-2 max-h-96 overflow-y-auto text-sm">
-      <div class="grid grid-cols-2 gap-4">
+      <div class="md:grid md:grid-cols-2 md:gap-4">
         <div>
           <p class="font-semibold"> <span class="text-red-500"> * </span> Fecha de inicio </p>
-          <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.fechaInicio"
+          <input disabled (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.fechaInicio"
             class="input-generico w-full mt-2 mb-2" placeholder="Ej. LC0001" type="date">
         </div>
         <div>
-          <p class="font-semibold"> <span class="text-red-500"> * </span> Código </p>
-          <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.codigo"
-            class="input-generico w-full mt-2 mb-2" placeholder="Ej. LC0001" type="text">
+          <p class="font-semibold"> <span class="text-red-500"> * </span> Fecha de colocación </p>
+          <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.fechaColocacionEstimada"
+            class="input-generico w-full mt-2 mb-2" placeholder="Ej. LC0001" type="date">
         </div>
       </div>
       <div class="mt-1">
+        <p class="font-semibold"> <span class="text-red-500"> * </span> Código </p>
+        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.codigo"
+          class="input-generico w-full mt-2 mb-2" placeholder="Ej. LC0001" type="text">
+      </div>
+      <div class="mt-1">
         <p class="font-semibold"> <span class="text-red-500"> * </span> Cliente </p>
-        <div class="flex items-center">
-          <select *ngIf="!loadingClientes" [(ngModel)]="obrasMaderaService.abmForm.clienteId" class="input-generico w-full mb-2 mt-2">
-            <option value=""> Seleccionar cliente </option>
-            <option *ngFor="let cliente of clientes" [value]="cliente.id"> {{ cliente.descripcion }} </option>
-          </select>
-          <button title="Nuevo cliente" class="boton-crear ml-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
+        <div class="flex items-center mt-2">
+          <ng-select placeholder="Seleccionar cliente" class="w-full" *ngIf="!loadingClientes" [(ngModel)]="obrasMaderaService.abmForm.clienteId">
+            <!-- <ng-option value=""> Seleccionar cliente </ng-option> -->
+            <ng-option *ngFor="let cliente of clientes" [value]="cliente.id"> {{ cliente.descripcion }} </ng-option>
+          </ng-select>
         </div>
         <p *ngIf="loadingClientes">
           <span> Cargando clientes... </span>
         </p>
       </div>
-      <div>
-        <p class="font-semibold"> Domicilio </p>
-        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.domicilio"
+      <div class="mt-2">
+        <p class="font-semibold"> Direccion </p>
+        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.direccion"
           class="input-generico w-full mt-2 mb-2" placeholder="Ej. 9 de Julio 811" type="text">
       </div>
-      <div>
-        <p class="font-semibold"> Descripción </p>
-        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.descripcion"
+      <div class="mt-1">
+        <p class="font-semibold"> Observaciones </p>
+        <input (keyup.enter)="submit()" [(ngModel)]="obrasMaderaService.abmForm.observaciones"
           class="input-generico w-full mt-2 mb-2" placeholder="Ej. Obra prioritaria" type="text">
       </div>
       <div *ngIf="obrasMaderaService.obraSeleccionada && obrasMaderaService.estadoAbm === 'editar'"
